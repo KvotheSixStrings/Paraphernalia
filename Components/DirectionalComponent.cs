@@ -32,6 +32,14 @@ public abstract class DirectionalComponent : MonoBehaviour {
 		}
 	}
 
+    public float angle
+    {
+        get
+        {
+            return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
+    }
+
 	[ContextMenu("Look Left")]
 	protected virtual void SetLeft () {
 	}
