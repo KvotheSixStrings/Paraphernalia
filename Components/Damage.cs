@@ -26,6 +26,11 @@ public class Damage : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D collision) {
 		HealthController h = collision.gameObject.GetComponent<HealthController>();
+        if (h && h.name == "Rashi")
+        {
+            Debug.Log(h);
+            Debug.Log(this);
+        }
 		if (h == null && affectAncestor) h = collision.gameObject.GetAncestorComponent<HealthController>();
 		if (h != null) h.TakeDamage(GetDamage(collision.relativeVelocity, collision.contacts[0].normal));
 	}		

@@ -41,15 +41,16 @@ public class HealthController : MonoBehaviour {
 			}
 
 			if (_health <= 0 && prevHealth > 0) {
-				if (_health <= destructionHealth && prevHealth > destructionHealth) {
+                onAnyDeath(this);
+                onDeath();
+                if (_health <= destructionHealth && prevHealth > destructionHealth) {
 					PlayDestruction();
 				}
 				else {
 					AudioManager.PlayVariedEffect(deathSoundName);
 					ParticleManager.Play(deathParticlesName, transform);
 				}
-				onAnyDeath(this);
-				onDeath();
+				
 			}
 			else if (_health <= destructionHealth && prevHealth > destructionHealth) {
 				PlayDestruction();
@@ -86,7 +87,7 @@ public class HealthController : MonoBehaviour {
 	}
 	
 	void Start() {
-		health = maxHealth;
+		_health = maxHealth;
 	}
 
 	public void TakeDamage(float damage, bool allowRecovery = true) {
