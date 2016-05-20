@@ -36,11 +36,18 @@ public class HealthController : MonoBehaviour {
 		set {
 			float prevHealth = _health;
 			_health = value;
+
 			if (_health > maxHealth) {
 				_health = maxHealth;
 			}
 
-			if (_health <= 0 && prevHealth > 0) {
+            if (prevHealth != _health)
+            {
+                onHealthChanged(_health, prevHealth, maxHealth);
+                onAnyHealthChanged(this, _health, prevHealth, maxHealth);
+            }
+
+            if (_health <= 0 && prevHealth > 0) {
                 onAnyDeath(this);
                 onDeath();
                 if (_health <= destructionHealth && prevHealth > destructionHealth) {
@@ -61,11 +68,6 @@ public class HealthController : MonoBehaviour {
 			}
 			else if (_health < prevHealth) {
 				AudioManager.PlayVariedEffect(damageSoundName);
-			}
-			
-			if (prevHealth != _health) {
-				onHealthChanged(_health, prevHealth, maxHealth);
-				onAnyHealthChanged(this, _health, prevHealth, maxHealth);
 			}
 		}
 	}

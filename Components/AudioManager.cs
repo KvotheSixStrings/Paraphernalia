@@ -163,7 +163,7 @@ public class AudioManager : MonoBehaviour {
 	public static void CrossfadeMusic(AudioClip clip, float fadeDuration) {
 		AudioSource currentSource = instance.musicSources[instance.currentMusicSource];
 		AudioSource nextSource = instance.musicSources[(instance.currentMusicSource + 1) % 2];
-		if (currentSource.clip == clip || nextSource.clip == clip) return;
+		if (currentSource.clip == clip ) return;
 		instance.StopCoroutine("CrossfadeMusicCoroutine");
 		nextSource.clip = clip;
 		instance.StartCoroutine("CrossfadeMusicCoroutine", fadeDuration);
